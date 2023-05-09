@@ -56,7 +56,8 @@ public class ListaDupla {
 			} else {
 				Celula anterior = this.pegaCelula(pos - 1);
 				Celula proxima = anterior.getProxima();
-				Celula nova = new Celula(anterior.getProxima(), elemento);
+				Celula nova = new Celula(proxima, elemento);
+				nova.setAnterior(anterior);
 				anterior.setProxima(nova);
 				proxima.setAnterior(nova);
 				this.totalDeElementos++;
@@ -74,8 +75,10 @@ public class ListaDupla {
 		} else {
 			this.primeira = this.primeira.getProxima();
 			this.totalDeElementos--;
-			if (this.totalDeElementos == 0) {
+			if (this.primeira == null) {
 				this.ultima = null;
+			} else {
+				this.primeira.setAnterior(null);
 			}
 
 		}
